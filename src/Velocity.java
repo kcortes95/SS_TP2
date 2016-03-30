@@ -25,4 +25,8 @@ public class Velocity {
 		return speed* Math.sin(angle);
 	}
 	
+	public void setAngle(double ang){
+		this.angle = ang;
+	}
+	
 }

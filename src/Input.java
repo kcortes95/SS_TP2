@@ -24,7 +24,7 @@ public class Input {
 			
 				while(dRead.hasNext() && sRead.hasNext()){
 					//Aca voy creando la particula!! :) 
-					particles.add(new Particle(Double.parseDouble(sRead.next()) , Double.parseDouble(sRead.next()), Double.parseDouble(dRead.next()), Double.parseDouble(dRead.next())));
+					//particles.add(new Particle(Double.parseDouble(sRead.next()) , Double.parseDouble(sRead.next()), Double.parseDouble(dRead.next()), Double.parseDouble(dRead.next())));
 				}
 				dRead.close();
 				sRead.close();

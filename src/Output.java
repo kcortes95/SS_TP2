@@ -1,9 +1,7 @@
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.Map;
+import java.io.PrintWriter;
 import java.util.Set;
 
 
@@ -15,16 +13,24 @@ public class Output {
 			instance = new Output();
 		return instance;
 	}
-	public void write(Map<Particle,Set<Particle>> map) {
-		Writer writer = null;
-		try{
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("output.txt")));
-			for(Map.Entry<Particle, Set<Particle>> entry: map.entrySet()){
-				writer.write(entry.getKey() + ": " + entry.getValue() + "\n");
+
+	public void write(Set<Particle> set, double time){
+		if(time == 0){
+			try{
+				PrintWriter pw = new PrintWriter("output.txt");
+				pw.close();
+			}catch (Exception e){
+				e.printStackTrace();
 			}
-			writer.close();
-		}catch (IOException e){
-			e.printStackTrace();
+		}
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("output.txt", true)))) {
+			out.write("Time " + String.valueOf(time) + "\n");
+			for(Particle p: set){
+				out.write(p.getID() + " " +  p.getPosition().getX() + " " + p.getPosition().getY() + " " + p.getV().getAngle() + "\n");
+			}
+		}catch (IOException e) {
+		    e.printStackTrace();
 		}
 	}
+	
 }
