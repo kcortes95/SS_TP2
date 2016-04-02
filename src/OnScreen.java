@@ -1,8 +1,13 @@
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
@@ -27,7 +32,7 @@ public class OnScreen extends JFrame {
 
 		Graphics g = this.getGraphics();
 		int dimen = 20;
-		 g.clearRect(0, 0, getWidth(), getHeight());
+		g.clearRect(0, 0, getWidth(), getHeight());
 
 		for (Particle p : particles) {
 			g.setColor(p.getColor());
@@ -41,6 +46,7 @@ public class OnScreen extends JFrame {
 			Line2D lin = new Line2D.Double(x, y, x + x2, y + y2);
 			g2.draw(lin);
 		}
+		// this.saveImage();
 
 	}
 
@@ -48,12 +54,23 @@ public class OnScreen extends JFrame {
 		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		this.paint(img.getGraphics());
 		try {
-			String nombre = Calendar.getInstance().getTimeInMillis()+".png";
+			String nombre = "SS2-" + Calendar.getInstance().getTimeInMillis() + ".png";
 			ImageIO.write(img, "png", new File(nombre));
-			System.out.println("Imagen guardada como "+nombre);
+			System.out.println("Imagen guardada como " + nombre);
 		} catch (Exception e) {
 			System.out.println("Imagen no guardada. " + e.getMessage());
 		}
+	}
+
+	public void captureScreen() throws Exception {
+
+		String name = "SSTP02-"+Calendar.getInstance().getTimeInMillis() + ".png";
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle screenRectangle = new Rectangle(screenSize);
+		Robot robot = new Robot();
+		BufferedImage image = robot.createScreenCapture(screenRectangle);
+		ImageIO.write(image, "png", new File(name));
+		System.out.println("Captured screen " + name);
 	}
 
 }

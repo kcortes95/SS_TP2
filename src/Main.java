@@ -29,7 +29,15 @@ public class Main {
 			}
 			Set<Particle> parts = map.get(t);
 			screen.draw(parts);
-			screen.saveImage();
+			//screen.saveImage();
+			
+			try {
+				screen.captureScreen();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 
