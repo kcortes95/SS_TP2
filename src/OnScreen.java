@@ -31,7 +31,7 @@ public class OnScreen extends JFrame {
 	public void draw(Set<Particle> particles) {
 
 		Graphics g = this.getGraphics();
-		int dimen = 20;
+		int dimen = 30;
 		g.clearRect(0, 0, getWidth(), getHeight());
 
 		for (Particle p : particles) {

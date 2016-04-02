@@ -9,12 +9,12 @@ public class Main {
 	public static void main(String[] args) {
 		//Rmax 1
 		int L = 5;
-		int N = 10;
+		int N = 100;
 		int Rc = 1;
 		Map<Double,Set<Particle>> map = new TreeMap<>();
 		Set<Particle> set = ParticleGenerator(N,L);
 		Grid grid = new LinearGrid(L, (int)(L/(Rc+2*1)), set);
-		Simulation s = new Simulation(grid, 10,1,Rc,0.1,set);
+		Simulation s = new Simulation(grid, 70,1,Rc,0.1,set);
 		s.run();
 		Input.readParticles(N, "output.txt", map);
 		
@@ -22,7 +22,7 @@ public class Main {
 		OnScreen screen = new OnScreen(300, 300);
 		for(Double t : times){
 			try {
-				Thread.sleep(750);
+				Thread.sleep(75);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
