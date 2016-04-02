@@ -1,55 +1,46 @@
+import java.awt.Color;
 import java.io.File;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Input {
-	
-	private static int N = 0;
-	private static int L = 0;
-	private static double actualTime = 0;
-	
-	public static void readParticles(String dPath, String sPath, Set<Particle> particles){
+
+	public static void readParticles(int N, String path, Map<Double, Set<Particle>> map) {
 
 		try {
-			
-			File dFile = new File(dPath);
-			File sFile = new File(sPath);
+
+			File file = new File(path);
 			
 			try {
-				Scanner dRead = new Scanner(dFile);
-				Scanner sRead = new Scanner(sFile);
-				actualTime = Double.parseDouble(dRead.next());
-				N = Integer.parseInt(sRead.next());
-				L = Integer.parseInt(sRead.next());
-			
-				while(dRead.hasNext() && sRead.hasNext()){
-					//Aca voy creando la particula!! :) 
-					//particles.add(new Particle(Double.parseDouble(sRead.next()) , Double.parseDouble(sRead.next()), Double.parseDouble(dRead.next()), Double.parseDouble(dRead.next())));
-				}
-				dRead.close();
-				sRead.close();
+				Scanner read = new Scanner(file);
 				
+				System.out.println("Reading particles from file "+path);
+				while (read.hasNextLine()) {
+					Double actualTime = Double.parseDouble(read.next());
+					Set<Particle> parts = new TreeSet<>();
+					System.out.println("Actual time reading: "+ actualTime);
+					for (int i = 0; i < N; i++) {
+						int ID = Integer.parseInt(read.next()); //no lo uso para nadaaaaa
+						System.out.println("Reading data ID: " + ID);
+						double x = Double.parseDouble(read.next());
+						double y = Double.parseDouble(read.next());
+						double angle = Double.parseDouble(read.next());
+						Velocity v = new Velocity(0.3, angle);
+						Particle p = new Particle(1.0, Color.RED, x, y, v);
+						parts.add(p);
+					}
+					map.put(actualTime, parts);
+				}
+				
+				read.close();
+
 			} catch (Exception e) {
-				System.out.println("Error scanning file");
+				System.out.println("Oops... Creo que tuvimos un problema");
 			}
-			
+
 		} catch (Exception e) {
 			System.out.println("Error opening or finding file");
 		}
 		
 	}
-	
-	public static int getL() {
-		return L;
-	}
-	
-	public static double getActualTime() {
-		return actualTime;
-	}
-	
-	public static int getN() {
-		return N;
-	}
-
 
 }

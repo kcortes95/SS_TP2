@@ -24,7 +24,7 @@ public class Output {
 			}
 		}
 		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("output.txt", true)))) {
-			out.write("Time " + String.valueOf(time) + "\n");
+			out.write(String.valueOf(time) + "\n");
 			for(Particle p: set){
 				out.write(p.getID() + " " +  p.getPosition().getX() + " " + p.getPosition().getY() + " " + p.getV().getAngle() + "\n");
 			}

@@ -1,4 +1,4 @@
-import java.util.*;
+import java.awt.Color;
 
 public class Particle implements Comparable<Particle>{
 	
@@ -11,9 +11,9 @@ public class Particle implements Comparable<Particle>{
 	//private Position posNext; //me dice cual es la posicion en el siguiente momento!! 
 	
 	private double radio;
-	private double color;
+	private Color color;
 	
-	public Particle(double radio, double color, double x, double y, Velocity v) {
+	public Particle(double radio, Color color, double x, double y, Velocity v) {
 		this.pos = new Position(x,y);
 		this.v = v;
 		this.radio = radio;
@@ -40,12 +40,16 @@ public class Particle implements Comparable<Particle>{
 	}
 	
 
-	public void setColor(double color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 	
 	public int getID(){
 		return this.ID;
+	}
+	
+	public Color getColor() {
+		return color;
 	}
 	
 	@Override
