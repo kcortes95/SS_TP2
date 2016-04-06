@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.io.File;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -11,12 +9,12 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		//Rmax 1
 		int L = 20;
-		int N = 1200;
+		int N = 1000;
 		int Rc = 1;
 		Map<Double,Set<Particle>> map = new TreeMap<>();
 		Set<Particle> set = ParticleGenerator(N,L);
 		Grid grid = new LinearGrid(L, (int)(L/(Rc+2*1)), set);
-		Simulation s = new Simulation(grid, 100,1,Rc,0.1,set);
+		Simulation s = new Simulation(grid, 120,1,Rc,0.1,set);
 		s.run();
 		Input.readParticles(N, "output.txt", map);
 		
@@ -24,7 +22,7 @@ public class Main {
 		OnScreen screen = new OnScreen(800, 600);
 		Thread.sleep(500);
 		for(Double t : times){
-			Thread.sleep(100);
+			Thread.sleep(50);
 			Set<Particle> parts = map.get(t);
 			screen.draw(parts);
 			
