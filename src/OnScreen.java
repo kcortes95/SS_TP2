@@ -15,10 +15,12 @@ public class OnScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	int width, height;
+	double L;
 
-	public OnScreen(int width, int height) {
+	public OnScreen(double L, int width, int height) {
 		this.width = width;
 		this.height = height;
+		this.L = L;
 		setSize(width, height);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,17 +31,16 @@ public class OnScreen extends JFrame {
 	public void draw(Set<Particle> particles) {
 
 		Graphics g = this.getGraphics();
-		int dimen = 30;
 		g.clearRect(0, 0, getWidth(), getHeight());
 
 		for (Particle p : particles) {
 			g.setColor(p.getColor());
 			double x, y, x2, y2;
 
-			x = (p.getPosition().getX()) * dimen;
-			y = (p.getPosition().getY()) * dimen;
-			x2 = (p.getV().getXVelocity()) * dimen;
-			y2 = (p.getV().getYVelocity()) * dimen;
+			x = ((p.getPosition().getX())/L) * width;
+			y = ((p.getPosition().getY())/L) * height;
+			x2 = ((p.getV().getXVelocity())/L) * width;
+			y2 = ((p.getV().getYVelocity())/L) * height;
 
 			Graphics2D g2 = (Graphics2D) g;
 			Line2D lin = new Line2D.Double(x, y, x + x2, y + y2);
@@ -48,7 +49,7 @@ public class OnScreen extends JFrame {
 
 	}
 
-	public void saveImage() {
+	/*public void saveImage() {
 		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		this.paint(img.getGraphics());
 		try {
@@ -63,16 +64,12 @@ public class OnScreen extends JFrame {
 	public void captureScreen() throws Exception {
 
 		String name = "SSTP02-"+Calendar.getInstance().getTimeInMillis() + ".png";
-		//Dimension screenSize = new Dimension(this.width, this.height);
-		
-		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		//Rectangle screenRectangle = new Rectangle(screenSize);
+
 		Rectangle screenRectangle = new Rectangle(this.getX(), this.getY()+20, this.width, this.height);
 		Robot robot = new Robot();
 		BufferedImage image = robot.createScreenCapture(screenRectangle);
 		ImageIO.write(image, "png", new File(name));
 		System.out.println("Captured screen " + name);
-	}
+	}*/
 
 }

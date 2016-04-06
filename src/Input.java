@@ -20,7 +20,7 @@ public class Input {
 					System.out.println("Actual time reading: "+ actualTime);
 					for (int i = 0; i < N; i++) {
 						int ID = Integer.parseInt(read.next()); //no lo uso para nadaaaaa
-						System.out.println("Reading data ID: " + ID);
+						//System.out.println("Reading data ID: " + ID);
 						double x = Double.parseDouble(read.next());
 						double y = Double.parseDouble(read.next());
 						double angle = Double.parseDouble(read.next());

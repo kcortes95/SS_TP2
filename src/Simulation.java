@@ -41,6 +41,7 @@ public class Simulation {
 	}
 	
 	private void simulate(){
+		condition.clear();
 		calculateNeighbours();
 		updateParticles();
 	}
@@ -49,7 +50,7 @@ public class Simulation {
 		for(Particle p: particles){
 			p.updatePos(intervals);
 			double avAngle = getAverageAngle(p);
-			p.setAngle(avAngle + (Math.random()*2-1)*noiseAmp);
+			p.setAngle(avAngle + (Math.random()-0.5)*noiseAmp);
 		}
 	}
 	
@@ -64,7 +65,7 @@ public class Simulation {
 			totalSin /= condition.get(p).size()+1;
 			totalCos /= condition.get(p).size()+1;
 		}
-		return Math.atan(totalSin/totalCos);
+		return Math.atan2(totalSin,totalCos);
 	}
 	
 	private void calculateNeighbours(){

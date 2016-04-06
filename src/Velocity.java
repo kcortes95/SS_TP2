@@ -6,7 +6,7 @@ public class Velocity {
 	
 	public Velocity (double speed, double angle){
 		this.speed=speed;
-		this.angle= angle % (2*Math.PI);
+		this.angle= angle;
 	}
 	
 	public double getAngle() {

@@ -8,9 +8,9 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		//Rmax 1
-		int L = 20;
-		int N = 1000;
-		int Rc = 1;
+		int L = 250;
+		int N = 500;
+		double Rc = 1;
 		Map<Double,Set<Particle>> map = new TreeMap<>();
 		Set<Particle> set = ParticleGenerator(N,L);
 		Grid grid = new LinearGrid(L, (int)(L/(Rc+2*1)), set);
@@ -19,7 +19,7 @@ public class Main {
 		Input.readParticles(N, "output.txt", map);
 		
 		Set<Double> times = map.keySet();
-		OnScreen screen = new OnScreen(800, 600);
+		OnScreen screen = new OnScreen(L, 800, 600);
 		Thread.sleep(500);
 		for(Double t : times){
 			Thread.sleep(50);
@@ -27,7 +27,7 @@ public class Main {
 			screen.draw(parts);
 			
 			try {
-				screen.captureScreen();
+				//screen.captureScreen();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
