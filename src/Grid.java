@@ -24,15 +24,14 @@ public abstract class Grid {
 	
 	private void insertParticles(Set<Particle> particles){
 		for(Particle p: particles){
-			int x = (int) (Math.floor(p.getPosition().getX()/(L/M)));
-			int y = (int) (Math.floor(p.getPosition().getY()/(L/M)));
-			//Habilitar el codigo de abajo para ver las posiciones reales, y en la grilla de las particulas
-			/*
-			System.out.println("x: " + p.getPosition().getX() + " - y: " + p.getPosition().getY());
-			System.out.println("x: " + x + " - y: " + y);
-			*/
-			cells[x][y].getParticles().add(p);
+			insert(p);
 		}
+	}
+	
+	public void insert(Particle p){
+		int x = (int) (Math.floor(p.getPosition().getX()/(L/M)));
+		int y = (int) (Math.floor(p.getPosition().getY()/(L/M)));
+		cells[x][y].getParticles().add(p);
 	}
 	
 	public Cell getCell(int x, int y){
@@ -45,5 +44,9 @@ public abstract class Grid {
 	
 	public int getM(){
 		return M;
+	}
+	
+	public double getL() {
+		return L;
 	}
 }

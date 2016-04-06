@@ -48,7 +48,7 @@ public class Simulation {
 	
 	private void updateParticles(){
 		for(Particle p: particles){
-			p.updatePos(intervals);
+			updatePosition(p);
 			double avAngle = getAverageAngle(p);
 			p.setAngle(avAngle + (Math.random()-0.5)*noiseAmp);
 		}
@@ -92,6 +92,35 @@ public class Simulation {
 					}
 				}
 			}
+		}
+	}
+	
+	private void updatePosition(Particle p){
+		double cellLength = grid.getL()/grid.getM();
+		double x = p.getPosition().getX();
+		double y = p.getPosition().getY();
+		p.updatePos(intervals);
+		int cellX = (int) Math.floor(x/cellLength);
+		int cellY = (int) Math.floor(y/cellLength);
+		int newCellX = (int)Math.floor(p.getPosition().getX()/cellLength);
+		int newCellY = (int)Math.floor(p.getPosition().getY()/cellLength);
+		if(newCellX != cellX ||newCellY != cellY){
+			double newX = p.getPosition().getX();
+			double newY = p.getPosition().getY();
+			grid.getCell(cellX, cellY).getParticles().remove(p);
+			if(newCellX < 0){
+				newX = p.getPosition().getX() + grid.getL();
+			}else if(newCellX >= grid.getM()){
+				newX = p.getPosition().getX() - grid.getL();
+			}
+			if(newCellY < 0){
+				newY = p.getPosition().getY() + grid.getL();
+			}else if(newCellY >= grid.getM()){
+				newY = p.getPosition().getY() - grid.getL();
+			}
+			
+			p.setPosition(newX, newY);
+			grid.insert(p);
 		}
 	}
 	

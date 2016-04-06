@@ -8,13 +8,13 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		//Rmax 1
-		int L = 250;
-		int N = 500;
-		double Rc = 1;
+		int L = 100;
+		int N = 50;
+		double Rc = 3;
 		Map<Double,Set<Particle>> map = new TreeMap<>();
 		Set<Particle> set = ParticleGenerator(N,L);
-		Grid grid = new LinearGrid(L, (int)(L/(Rc+2*1)), set);
-		Simulation s = new Simulation(grid, 120,1,Rc,0.1,set);
+		Grid grid = new CircularGrid(L, (int)(L/(Rc+2*1)), set);
+		Simulation s = new Simulation(grid, 1000,0.5,Rc,0.1,set);
 		s.run();
 		Input.readParticles(N, "output.txt", map);
 		
@@ -22,7 +22,7 @@ public class Main {
 		OnScreen screen = new OnScreen(L, 800, 600);
 		Thread.sleep(500);
 		for(Double t : times){
-			Thread.sleep(50);
+			Thread.sleep(10);
 			Set<Particle> parts = map.get(t);
 			screen.draw(parts);
 			
@@ -38,10 +38,10 @@ public class Main {
 	private static Set<Particle> ParticleGenerator(int N, int L){
 		double radius = 1.0;
 		double speed = 0.3;
-		Set<Particle> list = new HashSet<Particle>();
+		Set<Particle> set = new HashSet<Particle>();
 		for(int i=1 ; i<=N;i++){
-			list.add(new Particle(radius, Color.RED, Math.random()*L, Math.random()*L, new Velocity(speed, Math.random()*(2*Math.PI))));
+			set.add(new Particle(radius, Color.RED, Math.random()*L, Math.random()*L, new Velocity(speed, Math.random()*(2*Math.PI))));
 		}
-		return list;
+		return set;
 	}
 }

@@ -72,7 +72,13 @@ public class Particle implements Comparable<Particle>{
 	}
 	
 	public void updatePos(double time){
-		this.pos = new Position(pos.getX()+v.getXVelocity()*time,pos.getY()+v.getYVelocity()*time);
+		double x = pos.getX()+v.getXVelocity()*time;
+		double y = pos.getY()+v.getYVelocity()*time;
+		this.pos = new Position(x,y);
+	}
+	
+	public void setPosition(double x, double y){
+		this.pos = new Position(x,y);
 	}
 	
 	public void setAngle(double ang){
