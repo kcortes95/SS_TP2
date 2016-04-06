@@ -25,7 +25,7 @@ public class Input {
 						double y = Double.parseDouble(read.next());
 						double angle = Double.parseDouble(read.next());
 						Velocity v = new Velocity(0.3, angle);
-						Particle p = new Particle(1.0, Color.BLACK, x, y, v);
+						Particle p = new Particle(1.0, Color.BLUE , x, y, v);
 						parts.add(p);
 					}
 					map.put(actualTime, parts);

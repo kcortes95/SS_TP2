@@ -3,7 +3,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.Shape;
 import java.awt.Toolkit;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -37,6 +39,8 @@ public class OnScreen extends JFrame {
 		for (Particle p : particles) {
 			g.setColor(p.getColor());
 			double x, y, x2, y2;
+			int radius = 2;
+
 			x = (p.getPosition().getX()) * dimen;
 			y = (p.getPosition().getY()) * dimen;
 			x2 = (p.getV().getXVelocity()) * dimen;
@@ -44,7 +48,9 @@ public class OnScreen extends JFrame {
 
 			Graphics2D g2 = (Graphics2D) g;
 			Line2D lin = new Line2D.Double(x, y, x + x2, y + y2);
+		    //Shape circle = new Ellipse2D.Double(x2 - radius, y2 - radius, 2.0 * radius, 2.0 * radius);
 			g2.draw(lin);
+			//g2.draw(circle);
 		}
 		// this.saveImage();
 
@@ -65,8 +71,12 @@ public class OnScreen extends JFrame {
 	public void captureScreen() throws Exception {
 
 		String name = "SSTP02-"+Calendar.getInstance().getTimeInMillis() + ".png";
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		Rectangle screenRectangle = new Rectangle(screenSize);
+		//Dimension screenSize = new Dimension(this.width, this.height);
+		
+		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		//Rectangle screenRectangle = new Rectangle(screenSize);
+		Rectangle screenRectangle = new Rectangle(this.getX(), this.getY()+20, this.width, this.height);
 		Robot robot = new Robot();
 		BufferedImage image = robot.createScreenCapture(screenRectangle);
 		ImageIO.write(image, "png", new File(name));
