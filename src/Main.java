@@ -7,27 +7,24 @@ import java.util.TreeMap;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
-		int runs = 50;
-		int L = 100;
-		int N = 50;
-		double Rc = 3;
-		double totalVa = 0;
-		for(int i=0; i<runs; i++){
-			Map<Double,Set<Particle>> map = new TreeMap<>();
-			Set<Particle> set = ParticleGenerator(N,L);
-			Grid grid = new CircularGrid(L, getM(L,Rc), set);
-			Simulation s = new Simulation(grid, 300,1,Rc,1,set);
-			double vA = s.run();
-			totalVa += vA/(N*0.3);
-		}
-		System.out.println("vA: " + totalVa/runs);
-		/*Input.readParticles(N, "output.txt", map);
+		int runs = 20;
+		int L = 40;
+		int N = 400;
+		double Rc = 1;
+		double noise = 0;
+		Map<Double,Set<Particle>> map = new TreeMap<>();
+		Set<Particle> set = ParticleGenerator(N,L);
+		Grid grid = new CircularGrid(L, getM(L,Rc), set);
+		Simulation s = new Simulation(grid, 500,1,Rc,noise,set);
+		double vA = s.run();
+		
+		Input.readParticles(N, "output.txt", map);
 		
 		Set<Double> times = map.keySet();
 		OnScreen screen = new OnScreen(L, 800, 600);
 		Thread.sleep(500);
 		for(Double t : times){
-			Thread.sleep(10);
+			Thread.sleep(200);
 			Set<Particle> parts = map.get(t);
 			screen.draw(parts);
 			
@@ -37,7 +34,7 @@ public class Main {
 				e.printStackTrace();
 			}
 
-		}*/
+		}
 	}
 
 	private static Set<Particle> ParticleGenerator(int N, int L){

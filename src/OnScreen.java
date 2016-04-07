@@ -27,36 +27,40 @@ public class OnScreen extends JFrame {
 
 		Graphics g = this.getGraphics();
 		g.clearRect(0, 0, getWidth(), getHeight());
-		Color c = Color.ORANGE;
 		
 		for (Particle p : particles) {
-			double angle = p.getV().angle;
 			
-			if(0<=angle && angle<(Math.PI/2)){
-				c=Color.BLUE;
-			}else if((Math.PI/2)<=angle && angle<Math.PI){
-				c=Color.RED;
-			}else{
-				c=Color.GREEN;
-			}
+			setParticleColor(p);
+
+			double radius = 2.0;
 			
-			g.setColor(c);
-			double x, y, x2, y2;
-			double radious = 2.0;
-			
-			x = ((p.getPosition().getX())/L) * width;
-			y = ((p.getPosition().getY())/L) * height;
-			x2 = ((p.getV().getXVelocity())/L) * width;
-			y2 = ((p.getV().getYVelocity())/L) * height;
+			double x = ((p.getPosition().getX())/L) * width;
+			double y = ((p.getPosition().getY())/L) * height;
+			double x2 = ((p.getV().getXVelocity())/L) * width;
+			double y2 = ((p.getV().getYVelocity())/L) * height;
 
 			Graphics2D g2 = (Graphics2D) g;
 			Line2D lin = new Line2D.Double(x, y, x + x2, y + y2);
 			g2.draw(lin);
-			g2.setColor(Color.BLACK);
-			//Ellipse2D circle = new Ellipse2D.Double(x + x2-radious/2, y+y2-radious/2, radious, radious);
-			//g2.draw(circle);
+			g2.setColor(p.getColor());
+			Ellipse2D circle = new Ellipse2D.Double(x + x2-radius/2, y+y2-radius/2, radius, radius);
+			g2.draw(circle);
 		}
 
+	}
+	
+	private void setParticleColor(Particle p){
+		if(p.getV().getXVelocity()>0){
+			if(p.getV().getYVelocity()>0)
+				p.setColor(Color.BLUE);
+			else
+				p.setColor(Color.GREEN);
+		}else{
+			if(p.getV().getYVelocity()>0)
+				p.setColor(Color.ORANGE);
+			else
+				p.setColor(Color.BLACK);
+		}
 	}
 
 	/*public void saveImage() {
