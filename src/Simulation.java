@@ -31,13 +31,16 @@ public class Simulation {
 		this.particles = set;
 	}
 	
-	public void run(){
+	
+	//returns va
+	public double run(){
 		double time = 0;
 		while(time<=totalTime){
 			simulate();
 			Output.getInstace().write(particles,time);
 			time += intervals;
 		}
+		return calculateVa();
 	}
 	
 	private void simulate(){
@@ -132,6 +135,16 @@ public class Simulation {
 	
 	private double getDistance(Particle p1, Particle p2){
 		return Math.sqrt(Math.pow(p1.getPosition().getX()-p2.getPosition().getX(), 2) + Math.pow(p1.getPosition().getY()-p2.getPosition().getY(), 2))-p1.getRadio()-p2.getRadio();
+	}
+	
+	private double calculateVa(){
+		double xVel = 0;
+		double yVel = 0;
+		for(Particle p: particles){
+			xVel += p.getV().getXVelocity();
+			yVel += p.getV().getYVelocity();
+		}
+		return Math.sqrt(xVel*xVel+yVel*yVel);
 	}
 
 }

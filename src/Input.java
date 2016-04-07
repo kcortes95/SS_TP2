@@ -17,7 +17,7 @@ public class Input {
 				while (read.hasNextLine()) {
 					Double actualTime = Double.parseDouble(read.next());
 					Set<Particle> parts = new TreeSet<>();
-					System.out.println("Actual time reading: "+ actualTime);
+					//System.out.println("Actual time reading: "+ actualTime);
 					for (int i = 0; i < N; i++) {
 						int ID = Integer.parseInt(read.next()); //no lo uso para nadaaaaa
 						//System.out.println("Reading data ID: " + ID);

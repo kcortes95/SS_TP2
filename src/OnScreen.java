@@ -53,8 +53,8 @@ public class OnScreen extends JFrame {
 			Line2D lin = new Line2D.Double(x, y, x + x2, y + y2);
 			g2.draw(lin);
 			g2.setColor(Color.BLACK);
-			Ellipse2D circle = new Ellipse2D.Double(x + x2-radious/2, y+y2-radious/2, radious, radious);
-			g2.draw(circle);
+			//Ellipse2D circle = new Ellipse2D.Double(x + x2-radious/2, y+y2-radious/2, radious, radious);
+			//g2.draw(circle);
 		}
 
 	}
